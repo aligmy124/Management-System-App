@@ -1,4 +1,3 @@
-// features/Employee/Dashboard/ActivityChart.tsx
 "use client";
 
 import { Task } from "../Tasks/Types/Types";
@@ -56,21 +55,21 @@ export default function ActivityChart({ tasks }: Props) {
       const isPeak = item.count === peakDay.count && peakDay.count > 0;
       
       return (
-        <div className="bg-white px-5 py-4 rounded-2xl shadow-2xl border border-gray-100 min-w-[160px]">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-medium text-gray-500">{item.fullDay}</span>
+        <div className="bg-white px-3 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-2xl border border-gray-100 min-w-[130px] sm:min-w-[160px]">
+          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-medium text-gray-500">{item.fullDay}</span>
             {isPeak && (
-              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
+              <span className="text-[8px] sm:text-[10px] font-bold text-indigo-600 bg-indigo-50 px-1.5 sm:px-2 py-0.5 rounded-full">
                 Peak
               </span>
             )}
           </div>
-          <p className="text-3xl font-bold text-gray-900">{item.count}</p>
-          <p className="text-xs text-gray-500 mt-1">tasks created</p>
-          <div className="mt-2 pt-2 border-t border-gray-100">
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900">{item.count}</p>
+          <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 sm:mt-1">tasks created</p>
+          <div className="mt-1.5 sm:mt-2 pt-1.5 sm:pt-2 border-t border-gray-100">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-400">of total</span>
-              <span className="text-xs font-semibold text-indigo-600">{percentage}%</span>
+              <span className="text-[10px] sm:text-xs text-gray-400">of total</span>
+              <span className="text-[10px] sm:text-xs font-semibold text-indigo-600">{percentage}%</span>
             </div>
           </div>
         </div>
@@ -85,10 +84,10 @@ export default function ActivityChart({ tasks }: Props) {
     return (
       <text
         x={x + width / 2}
-        y={y - 8}
+        y={y - 6}
         fill="#64748B"
         textAnchor="middle"
-        fontSize={11}
+        fontSize={9}
         fontWeight="600"
       >
         {value}
@@ -97,64 +96,64 @@ export default function ActivityChart({ tasks }: Props) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full">
+    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full">
       {/* Header Section */}
-      <div className="p-6 pb-0">
-        <div className="flex items-start justify-between">
+      <div className="p-4 sm:p-5 md:p-6 pb-0">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-base font-semibold text-gray-900">Weekly Activity</h3>
-              <span className="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900">Weekly Activity</h3>
+              <span className="bg-indigo-50 text-indigo-700 text-[8px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full">
                 LIVE
               </span>
             </div>
-            <p className="text-xs text-gray-500">Tasks created this week</p>
+            <p className="text-[10px] sm:text-xs text-gray-500">Tasks created this week</p>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg">
-              <Zap className="h-3.5 w-3.5 text-amber-500" />
-              <span className="text-xs font-medium text-gray-700">{total}</span>
-              <span className="text-xs text-gray-400">total</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 sm:gap-1.5 bg-gray-50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg">
+              <Zap className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-500" />
+              <span className="text-[10px] sm:text-xs font-medium text-gray-700">{total}</span>
+              <span className="text-[10px] sm:text-xs text-gray-400 hidden xs:inline">total</span>
             </div>
           </div>
         </div>
 
         {/* Quick Stats Row */}
-        <div className="grid grid-cols-4 gap-3 mt-4 pb-4 border-b border-gray-100">
-          <div className="bg-gradient-to-br from-indigo-50 to-indigo-100/50 rounded-xl p-3">
-            <p className="text-[10px] font-medium text-indigo-600 uppercase tracking-wider">Average</p>
-            <p className="text-lg font-bold text-gray-900 mt-0.5">{average}</p>
-            <p className="text-[10px] text-gray-500">per day</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-3 sm:mt-4 pb-3 sm:pb-4 border-b border-gray-100">
+          <div className="bg-gradient-to-br from-indigo-50 to-indigo-100/50 rounded-lg sm:rounded-xl p-2 sm:p-3">
+            <p className="text-[8px] sm:text-[10px] font-medium text-indigo-600 uppercase tracking-wider">Average</p>
+            <p className="text-base sm:text-lg font-bold text-gray-900 mt-0.5">{average}</p>
+            <p className="text-[8px] sm:text-[10px] text-gray-500">per day</p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-xl p-3">
-            <p className="text-[10px] font-medium text-emerald-600 uppercase tracking-wider">Peak Day</p>
-            <p className="text-lg font-bold text-gray-900 mt-0.5">{peakDay.count}</p>
-            <p className="text-[10px] text-gray-500">{peakDay.fullDay}</p>
+          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-lg sm:rounded-xl p-2 sm:p-3">
+            <p className="text-[8px] sm:text-[10px] font-medium text-emerald-600 uppercase tracking-wider">Peak Day</p>
+            <p className="text-base sm:text-lg font-bold text-gray-900 mt-0.5">{peakDay.count}</p>
+            <p className="text-[8px] sm:text-[10px] text-gray-500">{peakDay.fullDay}</p>
           </div>
-          <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-xl p-3">
-            <p className="text-[10px] font-medium text-amber-600 uppercase tracking-wider">Busiest</p>
-            <p className="text-lg font-bold text-gray-900 mt-0.5">{peakDay.fullDay}</p>
-            <p className="text-[10px] text-gray-500">{peakDay.count} tasks</p>
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-lg sm:rounded-xl p-2 sm:p-3">
+            <p className="text-[8px] sm:text-[10px] font-medium text-amber-600 uppercase tracking-wider">Busiest</p>
+            <p className="text-base sm:text-lg font-bold text-gray-900 mt-0.5">{peakDay.fullDay}</p>
+            <p className="text-[8px] sm:text-[10px] text-gray-500">{peakDay.count} tasks</p>
           </div>
-          <div className={`bg-gradient-to-br rounded-xl p-3 ${
+          <div className={`bg-gradient-to-br rounded-lg sm:rounded-xl p-2 sm:p-3 ${
             trend ? 'from-emerald-50 to-emerald-100/50' : 'from-red-50 to-red-100/50'
           }`}>
-            <p className={`text-[10px] font-medium uppercase tracking-wider ${
+            <p className={`text-[8px] sm:text-[10px] font-medium uppercase tracking-wider ${
               trend ? 'text-emerald-600' : 'text-red-600'
             }`}>
               Trend
             </p>
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <div className="flex items-center gap-1 sm:gap-1.5 mt-0.5">
               {trend ? (
-                <TrendingUp className="h-4 w-4 text-emerald-600" />
+                <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-600" />
               ) : (
-                <TrendingDown className="h-4 w-4 text-red-600" />
+                <TrendingDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-red-600" />
               )}
-              <p className="text-lg font-bold text-gray-900">
+              <p className="text-base sm:text-lg font-bold text-gray-900">
                 {trend ? '↑' : '↓'}
               </p>
             </div>
-            <p className="text-[10px] text-gray-500">
+            <p className="text-[8px] sm:text-[10px] text-gray-500">
               {trend ? 'Improving' : 'Declining'}
             </p>
           </div>
@@ -162,13 +161,13 @@ export default function ActivityChart({ tasks }: Props) {
       </div>
 
       {/* Chart Section */}
-      <div className="p-4 pt-2">
-        <div className="h-72">
+      <div className="p-3 sm:p-4 pt-1 sm:pt-2">
+        <div className="h-48 sm:h-56 md:h-64 lg:h-72">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart 
               data={data} 
-              margin={{ top: 20, right: 20, left: 0, bottom: 5 }}
-              barGap={4}
+              margin={{ top: 15, right: 10, left: -5, bottom: 5 }}
+              barGap={2}
             >
               <defs>
                 <linearGradient id="gradientHigh" x1="0" y1="0" x2="0" y2="1">
@@ -200,17 +199,17 @@ export default function ActivityChart({ tasks }: Props) {
                 dataKey="day" 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#94A3B8', fontSize: 12, fontWeight: 500 }}
-                dy={8}
+                tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 500 }}
+                dy={4}
               />
               
               <YAxis 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#94A3B8', fontSize: 11 }}
+                tick={{ fill: '#94A3B8', fontSize: 9 }}
                 domain={[0, maxValue + 1]}
                 allowDecimals={false}
-                width={30}
+                width={20}
               />
               
               <Tooltip content={<CustomTooltip />} />
@@ -224,15 +223,15 @@ export default function ActivityChart({ tasks }: Props) {
                   value: `Avg ${average}`,
                   position: 'right',
                   fill: '#818CF8',
-                  fontSize: 10,
+                  fontSize: 8,
                   fontWeight: 600,
                 }}
               />
 
               <Bar 
                 dataKey="count" 
-                radius={[8, 8, 0, 0]}
-                barSize={42}
+                radius={[6, 6, 0, 0]}
+                barSize={24}
                 animationBegin={0}
                 animationDuration={1200}
                 animationEasing="ease-out"
@@ -275,24 +274,24 @@ export default function ActivityChart({ tasks }: Props) {
       </div>
 
       {/* Footer Section */}
-      <div className="px-6 pb-4">
-        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-              <span className="text-xs text-gray-500">Active</span>
+      <div className="px-4 sm:px-6 pb-3 sm:pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 sm:pt-3 border-t border-gray-100">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-indigo-500"></div>
+              <span className="text-[10px] sm:text-xs text-gray-500">Active</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-              <span className="text-xs text-gray-500">Peak</span>
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-purple-500"></div>
+              <span className="text-[10px] sm:text-xs text-gray-500">Peak</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-              <span className="text-xs text-gray-500">Inactive</span>
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-gray-300"></div>
+              <span className="text-[10px] sm:text-xs text-gray-500">Inactive</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 text-xs text-gray-400">
-            <Clock3 className="h-3 w-3" />
+          <div className="flex items-center gap-1 text-[10px] sm:text-xs text-gray-400">
+            <Clock3 className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
           </div>
         </div>
       </div>

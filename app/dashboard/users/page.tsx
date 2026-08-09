@@ -14,27 +14,24 @@ interface PageProps {
   }>;
 }
 
-// Generate metadata for the page
-export async function generateMetadata(): Promise<Metadata> {
-  return {
+export const metadata: Metadata = {
+  title: "Users | Project Management Dashboard",
+  description: "Manage and monitor all users in the system. View user details, roles, and activation status.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  openGraph: {
     title: "Users | Project Management Dashboard",
     description: "Manage and monitor all users in the system. View user details, roles, and activation status.",
-    robots: {
-      index: false,
-      follow: false,
-    },
-    openGraph: {
-      title: "Users | Project Management Dashboard",
-      description: "Manage and monitor all users in the system. View user details, roles, and activation status.",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Users | Project Management Dashboard",
-      description: "Manage and monitor all users in the system. View user details, roles, and activation status.",
-    },
-  };
-}
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Users | Project Management Dashboard",
+    description: "Manage and monitor all users in the system. View user details, roles, and activation status.",
+  },
+};
 
 export default async function UsersPage({ searchParams }: PageProps) {
   const params = await searchParams;

@@ -1,4 +1,3 @@
-// features/Manager/Dashboard/WeeklyActivity.tsx
 "use client";
 
 import { Task } from "../Tasks/Types/Types";
@@ -41,10 +40,10 @@ export default function WeeklyActivity({ tasks }: Props) {
     if (active && payload && payload.length) {
       const item = payload[0].payload;
       return (
-        <div className="bg-white px-5 py-4 rounded-2xl shadow-2xl border border-gray-100 min-w-[160px]">
-          <p className="text-xs font-medium text-gray-500 mb-1">{item.fullDay}</p>
-          <p className="text-3xl font-bold text-gray-900">{item.count}</p>
-          <p className="text-xs text-gray-500 mt-1">tasks created</p>
+        <div className="bg-white px-3 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-2xl border border-gray-100 min-w-[130px] sm:min-w-[160px]">
+          <p className="text-[10px] sm:text-xs font-medium text-gray-500 mb-0.5 sm:mb-1">{item.fullDay}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900">{item.count}</p>
+          <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 sm:mt-1">tasks created</p>
         </div>
       );
     }
@@ -52,46 +51,46 @@ export default function WeeklyActivity({ tasks }: Props) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full">
-      <div className="p-6 pb-0">
-        <div className="flex items-start justify-between">
+    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full">
+      <div className="p-4 sm:p-5 md:p-6 pb-0">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
           <div>
-            <h3 className="text-base font-semibold text-gray-900">Weekly Activity</h3>
-            <p className="text-xs text-gray-500 mt-0.5">Tasks created this week</p>
+            <h3 className="text-sm sm:text-base font-semibold text-gray-900">Weekly Activity</h3>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5">Tasks created this week</p>
           </div>
-          <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg">
-            <Zap className="h-3.5 w-3.5 text-amber-500" />
-            <span className="text-xs font-medium text-gray-700">{total}</span>
-            <span className="text-xs text-gray-400">total</span>
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-gray-50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg self-start sm:self-auto">
+            <Zap className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-500" />
+            <span className="text-[10px] sm:text-xs font-medium text-gray-700">{total}</span>
+            <span className="text-[10px] sm:text-xs text-gray-400 hidden xs:inline">total</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 mt-4 pb-4 border-b border-gray-100">
-          <div className="bg-gradient-to-br from-indigo-50 to-indigo-100/50 rounded-xl p-2.5">
-            <p className="text-[10px] font-medium text-indigo-600">Average</p>
-            <p className="text-base font-bold text-gray-900">{average}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 sm:mt-4 pb-3 sm:pb-4 border-b border-gray-100">
+          <div className="bg-gradient-to-br from-indigo-50 to-indigo-100/50 rounded-lg sm:rounded-xl p-2 sm:p-2.5">
+            <p className="text-[8px] sm:text-[10px] font-medium text-indigo-600 uppercase tracking-wider">Average</p>
+            <p className="text-sm sm:text-base font-bold text-gray-900">{average}</p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-xl p-2.5">
-            <p className="text-[10px] font-medium text-emerald-600">Peak</p>
-            <p className="text-base font-bold text-gray-900">{peakDay.count}</p>
+          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-lg sm:rounded-xl p-2 sm:p-2.5">
+            <p className="text-[8px] sm:text-[10px] font-medium text-emerald-600 uppercase tracking-wider">Peak</p>
+            <p className="text-sm sm:text-base font-bold text-gray-900">{peakDay.count}</p>
           </div>
-          <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-xl p-2.5">
-            <p className="text-[10px] font-medium text-amber-600">Busiest</p>
-            <p className="text-base font-bold text-gray-900">{peakDay.fullDay}</p>
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-lg sm:rounded-xl p-2 sm:p-2.5">
+            <p className="text-[8px] sm:text-[10px] font-medium text-amber-600 uppercase tracking-wider">Busiest</p>
+            <p className="text-sm sm:text-base font-bold text-gray-900">{peakDay.fullDay}</p>
           </div>
-          <div className={`bg-gradient-to-br rounded-xl p-2.5 ${
+          <div className={`bg-gradient-to-br rounded-lg sm:rounded-xl p-2 sm:p-2.5 ${
             trend ? 'from-emerald-50 to-emerald-100/50' : 'from-red-50 to-red-100/50'
           }`}>
-            <p className={`text-[10px] font-medium ${trend ? 'text-emerald-600' : 'text-red-600'}`}>
+            <p className={`text-[8px] sm:text-[10px] font-medium ${trend ? 'text-emerald-600' : 'text-red-600'} uppercase tracking-wider`}>
               Trend
             </p>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5 sm:gap-1">
               {trend ? (
-                <TrendingUp className="h-4 w-4 text-emerald-600" />
+                <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-600" />
               ) : (
-                <TrendingDown className="h-4 w-4 text-red-600" />
+                <TrendingDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-red-600" />
               )}
-              <p className="text-base font-bold text-gray-900">
+              <p className="text-sm sm:text-base font-bold text-gray-900">
                 {trend ? '↑' : '↓'}
               </p>
             </div>
@@ -99,16 +98,16 @@ export default function WeeklyActivity({ tasks }: Props) {
         </div>
       </div>
 
-      <div className="p-4 pt-2">
-        <div className="h-64">
+      <div className="p-3 sm:p-4 pt-1 sm:pt-2">
+        <div className="h-48 sm:h-56 md:h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
+            <BarChart data={data} margin={{ top: 10, right: 5, left: -5, bottom: 5 }}>
               <CartesianGrid strokeDasharray="4 4" stroke="#F1F5F9" vertical={false} />
-              <XAxis dataKey="day" axisLine={false} tickLine={false} />
-              <YAxis axisLine={false} tickLine={false} domain={[0, maxValue + 1]} />
+              <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
+              <YAxis axisLine={false} tickLine={false} domain={[0, maxValue + 1]} tick={{ fontSize: 9 }} width={20} />
               <Tooltip content={<CustomTooltip />} />
               <ReferenceLine y={Number(average)} stroke="#818CF8" strokeDasharray="6 6" />
-              <Bar dataKey="count" radius={[6, 6, 0, 0]} barSize={36}>
+              <Bar dataKey="count" radius={[6, 6, 0, 0]} barSize={24}>
                 {data.map((entry, index) => {
                   const isPeak = entry.count === peakDay.count && peakDay.count > 0;
                   return (

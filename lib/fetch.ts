@@ -6,6 +6,7 @@ export async function apiFetch<T>(
   endpoint: string,
   options: RequestInit = {},
 ): Promise<T> {
+  const start = performance.now();
   const token = await getToken();
   const isFormData = options.body instanceof FormData;
   
@@ -29,6 +30,8 @@ if (!res.ok) {
    error.fieldErrors
 )
 }
-
+console.log(
+  `[API] ${endpoint} → ${(performance.now() - start).toFixed(0)}ms`
+);
   return (await res.json()) as T;
 }

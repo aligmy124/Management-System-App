@@ -1,9 +1,10 @@
 import DashboardClient from "@/features/Dashboard/Shared/Components/DashboardClient";
 import UserProvider from "@/features/Auth/CurrentUser/Context/UserContext";
-import {currentUserServices} from "@/features/Auth/CurrentUser/Services/CurrentUserServices"
+import { getCurrentUser } from "@/lib/auth";
 import {SidebarProvider} from "@/features/Dashboard/Shared/Components/SidebarProvider"
 export default async function Layout({children}:{children:React.ReactNode}){
-    const user = await currentUserServices();
+    console.log("LAYOUT USER");
+    const user = await getCurrentUser();
     return(
     <UserProvider user={user}>
     <SidebarProvider>

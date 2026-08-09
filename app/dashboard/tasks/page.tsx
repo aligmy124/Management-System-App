@@ -1,4 +1,4 @@
-import { currentUserServices } from "@/features/Auth/CurrentUser/Services/CurrentUserServices";
+import { getCurrentUser, getUserRole } from "@/lib/auth";
 import TasksContent from "@/features/Employee/Tasks/Components/TasksContent";
 import TaskManagerContent from "@/features/Manager/Tasks/Components/TaskContent";
 import { taskServices } from "@/features/Employee/Tasks/Services/TasksServices";
@@ -23,28 +23,24 @@ function parseTaskStatus(status?: string): TaskStatus | undefined {
     : undefined;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const user = await currentUserServices();
-  const role = user?.group?.name ?? "User";
-  return {
-    title: `${role} Tasks | Project Management Dashboard`,
-    description: `Manage, track, and organize your tasks efficiently. View task details, monitor progress, and collaborate with your team through the ${role.toLowerCase()} dashboard.`,
-    robots: {
-      index: false,
-      follow: false,
-    },
-    openGraph: {
-      title: `${role} Tasks | Project Management Dashboard`,
-      description: `Manage, track, and organize your tasks efficiently. View task details, monitor progress, and collaborate with your team through the ${role.toLowerCase()} dashboard.`,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${role} Tasks | Project Management Dashboard`,
-      description: `Manage, track, and organize your tasks efficiently. View task details, monitor progress, and collaborate with your team through the ${role.toLowerCase()} dashboard.`,
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Tasks | Project Management Dashboard",
+  description: "Manage, track, and organize your tasks efficiently. View task details, monitor progress, and collaborate with your team through the dashboard.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  openGraph: {
+    title: "Tasks | Project Management Dashboard",
+    description: "Manage, track, and organize your tasks efficiently. View task details, monitor progress, and collaborate with your team through the dashboard.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tasks | Project Management Dashboard",
+    description: "Manage, track, and organize your tasks efficiently. View task details, monitor progress, and collaborate with your team through the dashboard.",
+  },
+};
 
 export default async function Tasks({ searchParams }: Props) {
   const { title, status, pageNumber } = await searchParams;
@@ -53,13 +49,9 @@ export default async function Tasks({ searchParams }: Props) {
   const currentPage =
     Number.isInteger(page) && page > 0 ? page : 1;
 
-  const user = await currentUserServices();
+  const role = await getUserRole();
 
-  if (!user) {
-    return null;
-  }
-
-  if (user.group?.name === "Employee") {
+  if (role === "Employee") {
     const tasks = await taskServices({
       title,
       status,
@@ -78,7 +70,7 @@ export default async function Tasks({ searchParams }: Props) {
     );
   }
 
-  if (user.group?.name === "Manager") {
+  if (role  === "Manager") {
     const tasks = await taskManagerServices({
       title,
       status: parseTaskStatus(status),

@@ -1,5 +1,5 @@
 import ProfileContent from "@/features/Profile/Components/ProfileContent"
-import { currentUserServices } from "@/features/Auth/CurrentUser/Services/CurrentUserServices";
+import { getCurrentUser } from "@/lib/auth";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Profile(){
-    const currentUser= await currentUserServices();
+    const currentUser= await getCurrentUser();
     return(
         <ProfileContent user={currentUser}/>
     )

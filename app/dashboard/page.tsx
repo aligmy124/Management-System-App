@@ -1,4 +1,4 @@
-import { currentUserServices } from "@/features/Auth/CurrentUser/Services/CurrentUserServices";
+import { getCurrentUser, getUserRole } from "@/lib/auth";
 import { projectServices } from "@/features/Employee/Projects/Services/ProjectsServices";
 import { projectManagerServices } from "@/features/Manager/Projects/services/ProjectsServices";
 import { taskServices } from "@/features/Employee/Tasks/Services/TasksServices";
@@ -8,35 +8,27 @@ import ManagerDashboard from "@/features/Manager/Dashboard/ManagerDashboard";
 
 import type { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const user = await currentUserServices();
-
-  const role = user?.group?.name ?? "User";
-
-  return {
-    title: `${role} Dashboard | TaskFlow`,
-    description: `${role} dashboard for managing projects and tasks.`,
-    robots: {
-      index: false,
-      follow: false,
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Dashboard | TaskFlow",
+  description: "Dashboard for managing projects and tasks.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 
 export default async function Dashboard() {
-  const user = await currentUserServices();
-  if (!user) {
-    return null;
-  }
+  const role = await getUserRole();
+  console.log("🔥 DASHBOARD PAGE");
 
-  if (user.group?.name === "Employee") {
+  if (role === "Employee") {
     const [projects, tasks] = await Promise.all([
       projectServices(),
       taskServices(),
     ]);
     return <EmployeeDashboard projects={projects.data} tasks={tasks.data} />;
-  } else if (user.group?.name === "Manager") {
+  } else if (role === "Manager") {
     const [projects, tasks] = await Promise.all([
       projectManagerServices(),
       taskManagerServices(),
@@ -46,3 +38,4 @@ export default async function Dashboard() {
 
   return null;
 }
+

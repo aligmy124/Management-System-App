@@ -6,32 +6,25 @@ import {
   Filter,
   CheckCircle,
   Clock as ClockIcon,
-
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Project } from "../Types/Types";
 import { Task } from "../Types/Types";
-
-
 import SearchInputs from "@/Shared/Components/SearchInputs";
 
 interface Props {
-  Projects: Project[],
-  search?: string
+  Projects: Project[];
+  search?: string;
 }
 
 export default function ProjectsContent({ Projects, search }: Props) {
   const [activeFilter, setActiveFilter] = useState("All");
-  
-  // For client-side search fallback
   const [clientSearchTerm, setClientSearchTerm] = useState(search || "");
-  
-  // Sync client search with URL search param
+
   useEffect(() => {
     setClientSearchTerm(search || "");
   }, [search]);
 
-  // Calculate stats from projects data
   const totalProjects = Projects.length;
   const totalTasks = Projects.reduce(
     (acc, project) => acc + project.task.length,
@@ -128,61 +121,46 @@ export default function ProjectsContent({ Projects, search }: Props) {
     return "from-orange-500 to-orange-400";
   };
 
-  // 🔥 FIX: Filter projects based on status AND search (both URL and client-side)
   const filteredProjects = Projects.filter((project) => {
-    // Status filter
     const projectStatus = getProjectStatus(project.task);
     const matchesFilter = activeFilter === "All" || projectStatus === activeFilter;
-    
-    // Search filter - check project title (case insensitive)
-    // This works with both URL search AND client-side fallback
     const searchTerm = search || clientSearchTerm;
     const matchesSearch = !searchTerm || 
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
     return matchesFilter && matchesSearch;
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#191C1E]">My Projects</h1>
-          <p className="mt-1 text-sm text-[#565E74]">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#191C1E]">My Projects</h1>
+          <p className="text-xs sm:text-sm text-[#565E74] mt-0.5 sm:mt-1">
             Manage and monitor the progress of your active workflows.
           </p>
         </div>
-        {/* {user?.group?.name === "Manager" && (
-          <Link
-            href="/dashboard/projects/create-project"
-            className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm shadow-blue-600/20 transition-all hover:shadow-lg hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <Plus size={18} />
-            Create Project
-          </Link>
-        )} */}
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+            className="rounded-xl sm:rounded-2xl bg-white p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
           >
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
                   {stat.label}
                 </p>
-                <p className="mt-1 text-2xl font-bold text-[#191C1E]">
+                <p className="mt-0.5 sm:mt-1 text-xl sm:text-2xl font-bold text-[#191C1E] truncate">
                   {stat.value}
                 </p>
               </div>
               <div
-                className={`rounded-xl p-2.5 ${
+                className={`rounded-lg sm:rounded-xl p-2 sm:p-2.5 flex-shrink-0 ${
                   stat.color === "blue"
                     ? "bg-blue-50 text-blue-600"
                     : stat.color === "green"
@@ -192,7 +170,7 @@ export default function ProjectsContent({ Projects, search }: Props) {
                         : "bg-orange-50 text-orange-600"
                 }`}
               >
-                <stat.icon size={20} />
+                <stat.icon size={18} className="sm:h-5 sm:w-5" />
               </div>
             </div>
           </div>
@@ -200,20 +178,19 @@ export default function ProjectsContent({ Projects, search }: Props) {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
-        <div className="flex items-center gap-2">
-          <Filter size={18} className="text-[#8E95A9]" />
-          <span className="text-sm font-medium text-[#565E74]">Filter:</span>
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-white p-3 sm:p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Filter size={16} className="sm:h-[18px] sm:w-[18px] text-[#8E95A9]" />
+          <span className="text-xs sm:text-sm font-medium text-[#565E74]">Filter:</span>
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {filters.map((filter) => (
             <button
-            ria-label="More options"
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${
+              className={`rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-sm font-medium transition-all ${
                 activeFilter === filter
-                  ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-sm shadow-blue-600/20"
+                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm shadow-blue-600/20"
                   : "text-[#565E74] hover:bg-[#f2f4f6]"
               }`}
             >
@@ -225,29 +202,30 @@ export default function ProjectsContent({ Projects, search }: Props) {
             </button>
           ))}
         </div>
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0">
           <SearchInputs search={search || ""} />
         </div>
       </div>
+
       {/* Projects Table */}
-      <div className="rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-[#EFF0F4] overflow-hidden">
-        <div className="w-full">
-          <table className="w-full table-fixed">
+      <div className="rounded-xl sm:rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-[#EFF0F4] overflow-hidden">
+        <div className="w-full overflow-x-auto">
+          <table className="w-full table-fixed min-w-[500px] sm:min-w-[640px]">
             <thead>
               <tr className="border-b border-[#EFF0F4] bg-[#F8F9FC]">
-                <th className="w-[30%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="w-[28%] sm:w-[30%] px-3 sm:px-6 py-2.5 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Project
                 </th>
-                <th className="w-[12%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="w-[10%] sm:w-[12%] px-3 sm:px-6 py-2.5 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   ID
                 </th>
-                <th className="w-[15%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="w-[14%] sm:w-[15%] px-3 sm:px-6 py-2.5 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Status
                 </th>
-                <th className="w-[18%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="w-[16%] sm:w-[18%] px-3 sm:px-6 py-2.5 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Progress
                 </th>
-                <th className="w-[10%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="w-[8%] sm:w-[10%] px-3 sm:px-6 py-2.5 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Tasks
                 </th>
               </tr>
@@ -255,13 +233,13 @@ export default function ProjectsContent({ Projects, search }: Props) {
             <tbody className="divide-y divide-[#EFF0F4]">
               {filteredProjects.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center">
+                  <td colSpan={5} className="px-3 sm:px-6 py-8 sm:py-12 text-center">
                     <div className="flex flex-col items-center">
-                      <FolderKanban size={48} className="text-[#D0D5DD]" />
-                      <p className="mt-4 text-sm font-medium text-[#191C1E]">
+                      <FolderKanban size={36} className="sm:h-12 sm:w-12 text-[#D0D5DD]" />
+                      <p className="mt-3 sm:mt-4 text-sm font-medium text-[#191C1E]">
                         No projects found
                       </p>
-                      <p className="text-sm text-[#565E74]">
+                      <p className="text-xs sm:text-sm text-[#565E74]">
                         Try adjusting your filters or search terms.
                       </p>
                     </div>
@@ -280,24 +258,24 @@ export default function ProjectsContent({ Projects, search }: Props) {
                       key={project.id}
                       className="group transition-colors hover:bg-[#F8F9FC]"
                     >
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4">
                         <div>
-                          <p className="text-sm font-semibold text-[#191C1E] truncate">
+                          <p className="text-xs sm:text-sm font-semibold text-[#191C1E] truncate">
                             {project.title}
                           </p>
-                          <p className="mt-0.5 text-xs text-[#565E74] truncate">
+                          <p className="hidden xs:block text-[10px] sm:text-xs text-[#565E74] truncate">
                             {project.description}
                           </p>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
-                        <span className="text-sm font-medium text-[#565E74]">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4">
+                        <span className="text-xs sm:text-sm font-medium text-[#565E74]">
                           #{String(project.id).padStart(4, "0")}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4">
                         <span
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${
+                          className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2 sm:px-2.5 py-0.5 sm:py-1 text-[9px] sm:text-xs font-medium ${
                             statusColors[
                               projectStatus as keyof typeof statusColors
                             ]
@@ -307,27 +285,26 @@ export default function ProjectsContent({ Projects, search }: Props) {
                           {getStatusLabel(projectStatus)}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="flex-1 max-w-[100px]">
-                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#EFF0F4]">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="flex-1 max-w-[60px] sm:max-w-[100px]">
+                            <div className="h-1 sm:h-1.5 w-full overflow-hidden rounded-full bg-[#EFF0F4]">
                               <div
-                                className={`h-full rounded-full bg-linear-to-r ${getProgressColor(progress)} transition-all duration-500`}
+                                className={`h-full rounded-full bg-gradient-to-r ${getProgressColor(progress)} transition-all duration-500`}
                                 style={{ width: `${progress}%` }}
                               />
                             </div>
                           </div>
-                          <span className="text-sm font-semibold text-[#191C1E] min-w-[40px]">
+                          <span className="text-xs sm:text-sm font-semibold text-[#191C1E] min-w-[30px] sm:min-w-[40px]">
                             {progress}%
                           </span>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F8F9FC] px-2.5 py-0.5 text-xs font-medium text-[#565E74]">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4">
+                        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full bg-[#F8F9FC] px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs font-medium text-[#565E74]">
                           {project.task.length}
                         </span>
                       </td>
-                      
                     </tr>
                   );
                 })

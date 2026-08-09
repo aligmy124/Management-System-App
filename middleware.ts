@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
+  console.log(
+    "🔥 MIDDLEWARE",
+    request.method,
+    request.nextUrl.pathname
+  );
+
   const token = request.cookies.get("token")?.value;
 
   if (!token) {

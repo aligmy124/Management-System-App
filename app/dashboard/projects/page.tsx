@@ -1,4 +1,4 @@
-import { currentUserServices } from "@/features/Auth/CurrentUser/Services/CurrentUserServices";
+import { getCurrentUser, getUserRole } from "@/lib/auth";
 import ProjectsContent from "@/features/Employee/Projects/Components/ProjectsContent";
 import ManagerProjectsContent from "@/features/Manager/Projects/Components/ManagerProjectsContent";
 import { projectServices } from "@/features/Employee/Projects/Services/ProjectsServices";
@@ -13,28 +13,14 @@ interface Props {
   }>;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const user = await currentUserServices();
-  const role = user?.group?.name ?? "User";
-  return {
-    title: `${role} Projects | Project Management Dashboard`,
-    description: `Manage, track, and organize your projects efficiently. View project details, monitor progress, and collaborate with your team through the ${role.toLowerCase()} dashboard.`,
-    robots: {
-      index: false,
-      follow: false,
-    },
-    openGraph: {
-      title: `${role} Projects | Project Management Dashboard`,
-      description: `Manage, track, and organize your projects efficiently. View project details, monitor progress, and collaborate with your team through the ${role.toLowerCase()} dashboard.`,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${role} Projects | Project Management Dashboard`,
-      description: `Manage, track, and organize your projects efficiently. View project details, monitor progress, and collaborate with your team through the ${role.toLowerCase()} dashboard.`,
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Projects | Project Management Dashboard",
+  description: "Manage and track your projects.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function Projects({ searchParams }: Props) {
   const { title, pageNumber } = await searchParams;
@@ -43,12 +29,9 @@ export default async function Projects({ searchParams }: Props) {
   const page = Number(pageNumber);
   const currentPage = Number.isInteger(page) && page > 0 ? page : 1;
   
-  const user = await currentUserServices();
-  if (!user) {
-    return null;
-  }
+  const role = await getUserRole();
 
-  if (user.group?.name === "Employee") {
+  if (role === "Employee") {
     const projects = await projectServices({
       title,
       pageNumber: currentPage
@@ -66,7 +49,7 @@ export default async function Projects({ searchParams }: Props) {
     );
   } 
   
-  if (user.group?.name === "Manager") {
+  if (role === "Manager") {
     const projects = await projectManagerServices({
       title,
       pageNumber: currentPage
