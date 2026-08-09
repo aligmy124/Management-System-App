@@ -56,6 +56,11 @@ export default function Sidebar() {
       href: "/dashboard/users",
     },
     {
+      name: "New",
+      icon: FolderKanban,
+      href: "/dashboard/new",
+    },
+    {
       name: "Tasks",
       icon: ListTodo,
       href: "/dashboard/tasks",
