@@ -1,11 +1,11 @@
 "use server";
-import { TaskSchema, TaskFormData } from "../Schema/Schema";
+import { UpdateTaskSchema, UpdateTaskFormData   } from "../UpdateSchema/Schema";
 import { ApiError } from "@/lib/api-error";
 import { updateTaskService } from "../Services/TasksServices";
 import { revalidatePath } from "next/cache";
 
-export async function updateTaskAction(data: TaskFormData, id: number) {
-  const result = TaskSchema.safeParse(data);
+export async function updateTaskAction(data: UpdateTaskFormData , id: number) {
+  const result = UpdateTaskSchema .safeParse(data);
   if (!result.success) {
     return {
       success: false,

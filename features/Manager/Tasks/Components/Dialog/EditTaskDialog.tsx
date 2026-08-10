@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Task } from "../../Types/Types";
 import { Employee } from "../../Types/Types";
 import { useForm } from "react-hook-form";
-import { TaskSchema, TaskFormData } from "../../Schema/Schema";
+import { UpdateTaskFormData , UpdateTaskSchema  } from "../../UpdateSchema/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateTaskAction } from "../../Actions/UpdateAction";
 import { toast } from "sonner";
@@ -38,8 +38,8 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
     setError,
     watch,
     setValue,
-  } = useForm<TaskFormData>({
-    resolver: zodResolver(TaskSchema),
+  } = useForm<UpdateTaskFormData >({
+    resolver: zodResolver(UpdateTaskSchema ),
     defaultValues: {
       title: "",
       description: "",
@@ -62,7 +62,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
     }
   }, [task, open, reset]);
 
-  const onSubmit = async (data: TaskFormData) => {
+  const onSubmit = async (data: UpdateTaskFormData ) => {
   console.log("1 - SUBMIT:", data);
 
   if (!task) {
@@ -84,7 +84,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
 
       if (result.fieldErrors) {
         Object.entries(result.fieldErrors).forEach(([field, messages]) => {
-          setError(field as keyof TaskFormData, {
+          setError(field as keyof UpdateTaskFormData , {
             type: "manual",
             message: messages?.[0],
           });

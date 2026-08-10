@@ -20,7 +20,6 @@ export const TaskSchema = z.object({
     .number()
     .int("Project ID must be an integer")
     .positive("You must select a valid project")
-    .optional(),
 });
 
 export type TaskFormData = z.infer<typeof TaskSchema>;
