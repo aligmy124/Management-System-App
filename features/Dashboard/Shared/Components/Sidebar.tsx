@@ -169,13 +169,13 @@ export default function Sidebar() {
 
             {/* Quick Stats */}
             <div className="mt-6 rounded-xl bg-linear-to-br from-blue-600 to-indigo-600 p-4 shadow-lg shadow-blue-600/20">
-              <p className="text-xs font-medium text-blue-100">Today's Progress</p>
-              <p className="mt-1 text-2xl font-bold text-white">82%</p>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
-                <div className="h-full w-[82%] rounded-full bg-white" />
-              </div>
-              <p className="mt-1.5 text-xs text-blue-100">18 of 22 tasks completed</p>
-            </div>
+  <p className="text-xs font-medium text-blue-100">🔥 Stay Motivated</p>
+  <p className="mt-1 text-lg font-bold text-white">Make today count</p>
+  <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/20">
+    <div className="h-full w-1/2 rounded-full bg-white" />
+  </div>
+  <p className="mt-1.5 text-xs text-blue-100">Every effort brings you closer to your goals</p>
+</div>
           </nav>
         </div>
       </aside>

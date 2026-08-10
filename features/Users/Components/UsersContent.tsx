@@ -25,10 +25,10 @@ const CreateUserDialog = dynamic(
   {
     loading: () => (
       <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
-        <div className="bg-white rounded-2xl p-8 shadow-2xl">
+        <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-2xl max-w-[90vw] sm:max-w-none">
           <div className="flex items-center gap-3">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-            <span className="text-sm font-medium text-gray-700">Loading...</span>
+            <div className="h-5 w-5 sm:h-6 sm:w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
+            <span className="text-xs sm:text-sm font-medium text-gray-700">Loading...</span>
           </div>
         </div>
       </div>
@@ -41,10 +41,10 @@ const ToggleUserDialog = dynamic(
   {
     loading: () => (
       <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
-        <div className="bg-white rounded-2xl p-8 shadow-2xl">
+        <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-2xl max-w-[90vw] sm:max-w-none">
           <div className="flex items-center gap-3">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-            <span className="text-sm font-medium text-gray-700">Loading...</span>
+            <div className="h-5 w-5 sm:h-6 sm:w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
+            <span className="text-xs sm:text-sm font-medium text-gray-700">Loading...</span>
           </div>
         </div>
       </div>
@@ -137,13 +137,13 @@ export default function UsersContent({
 
   const getStatusBadge = (isActivated?: boolean) => {
     return isActivated ? (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700">
-        <div className="h-1.5 w-1.5 rounded-full bg-green-600" />
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-medium text-green-700">
+        <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-green-600" />
         Active
       </span>
     ) : (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-2.5 py-1 text-xs font-medium text-red-700">
-        <div className="h-1.5 w-1.5 rounded-full bg-red-600" />
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-medium text-red-700">
+        <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-red-600" />
         Inactive
       </span>
     );
@@ -154,122 +154,122 @@ export default function UsersContent({
   }, [users]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 px-2 sm:px-0">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#191C1E]">Users</h1>
-          <p className="mt-1 text-sm text-[#565E74]">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#191C1E]">Users</h1>
+          <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#565E74]">
             Manage users and their access permissions
           </p>
         </div>
         <button
           onClick={() => setOpenCreate(true)}
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm shadow-blue-600/20 transition-all hover:shadow-lg hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98]"
+          className="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-white shadow-sm shadow-blue-600/20 transition-all hover:shadow-lg hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto min-h-[44px] sm:min-h-0"
         >
-          <UserPlus size={18} />
+          <UserPlus size={16} className="sm:w-[18px] sm:h-[18px]" />
           Add User
         </button>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        <div className="rounded-2xl bg-white p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
+            <div className="min-w-0">
+              <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
                 Total Users
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#191C1E]">
+              <p className="mt-0.5 sm:mt-1 text-xl sm:text-2xl font-bold text-[#191C1E]">
                 {totalCount}
               </p>
             </div>
-            <div className="rounded-xl bg-blue-50 p-2.5 text-blue-600">
-              <Users size={20} />
+            <div className="rounded-xl bg-blue-50 p-2 sm:p-2.5 text-blue-600 flex-shrink-0">
+              <Users size={18} className="sm:w-[20px] sm:h-[20px]" />
             </div>
           </div>
         </div>
-        <div className="rounded-2xl bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+        <div className="rounded-2xl bg-white p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
+            <div className="min-w-0">
+              <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
                 Active
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#191C1E]">
+              <p className="mt-0.5 sm:mt-1 text-xl sm:text-2xl font-bold text-[#191C1E]">
                 {users.filter(u => u.isActivated).length}
               </p>
             </div>
-            <div className="rounded-xl bg-green-50 p-2.5 text-green-600">
-              <Power size={20} />
+            <div className="rounded-xl bg-green-50 p-2 sm:p-2.5 text-green-600 flex-shrink-0">
+              <Power size={18} className="sm:w-[20px] sm:h-[20px]" />
             </div>
           </div>
         </div>
-        <div className="rounded-2xl bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+        <div className="rounded-2xl bg-white p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] col-span-1 xs:col-span-2 lg:col-span-1">
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
+            <div className="min-w-0">
+              <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-[#8E95A9]">
                 Inactive
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#191C1E]">
+              <p className="mt-0.5 sm:mt-1 text-xl sm:text-2xl font-bold text-[#191C1E]">
                 {users.filter(u => !u.isActivated).length}
               </p>
             </div>
-            <div className="rounded-xl bg-red-50 p-2.5 text-red-600">
-              <PowerOff size={20} />
+            <div className="rounded-xl bg-red-50 p-2 sm:p-2.5 text-red-600 flex-shrink-0">
+              <PowerOff size={18} className="sm:w-[20px] sm:h-[20px]" />
             </div>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
+      <div className="rounded-2xl bg-white p-3 sm:p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3">
           {/* Username Search */}
           <div className="relative">
-            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
+            <Search size={16} className="sm:w-[18px] sm:h-[18px] absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
             <input
               type="text"
               placeholder="Username..."
               value={localSearch}
               onChange={(e) => setLocalSearch(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-9 pr-3 text-sm text-[#191C1E] placeholder:text-[#8E95A9] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all"
+              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-8 sm:pl-9 pr-2 sm:pr-3 text-xs sm:text-sm text-[#191C1E] placeholder:text-[#8E95A9] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all min-h-[44px] sm:min-h-0"
             />
           </div>
 
           {/* Email Search */}
           <div className="relative">
-            <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
+            <Mail size={16} className="sm:w-[18px] sm:h-[18px] absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
             <input
               type="email"
               placeholder="Email..."
               value={localEmail}
               onChange={(e) => setLocalEmail(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-9 pr-3 text-sm text-[#191C1E] placeholder:text-[#8E95A9] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all"
+              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-8 sm:pl-9 pr-2 sm:pr-3 text-xs sm:text-sm text-[#191C1E] placeholder:text-[#8E95A9] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all min-h-[44px] sm:min-h-0"
             />
           </div>
 
           {/* Country Search */}
           <div className="relative">
-            <MapPin size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
+            <MapPin size={16} className="sm:w-[18px] sm:h-[18px] absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
             <input
               type="text"
               placeholder="Country..."
               value={localCountry}
               onChange={(e) => setLocalCountry(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-9 pr-3 text-sm text-[#191C1E] placeholder:text-[#8E95A9] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all"
+              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-8 sm:pl-9 pr-2 sm:pr-3 text-xs sm:text-sm text-[#191C1E] placeholder:text-[#8E95A9] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all min-h-[44px] sm:min-h-0"
             />
           </div>
 
           {/* Group Filter */}
           <div className="relative">
-            <UserCog size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
+            <UserCog size={16} className="sm:w-[18px] sm:h-[18px] absolute left-3 top-1/2 -translate-y-1/2 text-[#8E95A9]" />
             <select
               value={localGroups}
               onChange={(e) => setLocalGroups(e.target.value)}
-              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-9 pr-8 text-sm text-[#191C1E] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all appearance-none bg-white"
+              className="w-full rounded-lg border border-[#EFF0F4] py-2 pl-8 sm:pl-9 pr-6 sm:pr-8 text-xs sm:text-sm text-[#191C1E] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 transition-all appearance-none bg-white min-h-[44px] sm:min-h-0"
             >
               <option value="all">All Users</option>
               <option value="1">Managers</option>
@@ -280,9 +280,9 @@ export default function UsersContent({
           {/* Apply Button */}
           <button
             onClick={applyFilters}
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm shadow-blue-600/20 transition-all hover:shadow-lg hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white shadow-sm shadow-blue-600/20 transition-all hover:shadow-lg hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98] min-h-[44px] sm:min-h-0"
           >
-            <Filter size={18} />
+            <Filter size={16} className="sm:w-[18px] sm:h-[18px]" />
             Apply Filters
           </button>
         </div>
@@ -302,27 +302,27 @@ export default function UsersContent({
       </Suspense>
 
       {/* Users Table */}
-      <div className="rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-[#EFF0F4] overflow-hidden">
+      <div className="rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-[#EFF0F4] overflow- ">
         <div className="w-full overflow-x-auto">
-          <table className="w-full table-fixed">
+          <table className="w-full min-w-[640px] sm:min-w-0">
             <thead>
               <tr className="border-b border-[#EFF0F4] bg-[#F8F9FC]">
-                <th className="w-[18%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   User
                 </th>
-                <th className="w-[15%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="  sm:table-cell px-3 sm:px-6 py-3 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Email
                 </th>
-                <th className="w-[12%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="  md:table-cell px-3 sm:px-6 py-3 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Phone
                 </th>
-                <th className="w-[12%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="  lg:table-cell px-3 sm:px-6 py-3 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Country
                 </th>
-                <th className="w-[10%] px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Status
                 </th>
-                <th className="w-[33%] px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-right text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#8E95A9]">
                   Actions
                 </th>
               </tr>
@@ -330,13 +330,13 @@ export default function UsersContent({
             <tbody className="divide-y divide-[#EFF0F4]">
               {filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center">
+                  <td colSpan={6} className="px-3 sm:px-6 py-8 sm:py-12 text-center">
                     <div className="flex flex-col items-center">
-                      <Users size={48} className="text-[#D0D5DD]" />
-                      <p className="mt-4 text-sm font-medium text-[#191C1E]">
+                      <Users size={36} className="sm:w-[48px] sm:h-[48px] text-[#D0D5DD]" />
+                      <p className="mt-3 sm:mt-4 text-xs sm:text-sm font-medium text-[#191C1E]">
                         No users found
                       </p>
-                      <p className="text-sm text-[#565E74]">
+                      <p className="text-xs sm:text-sm text-[#565E74]">
                         Try adjusting your filters.
                       </p>
                     </div>
@@ -348,57 +348,57 @@ export default function UsersContent({
                     key={user.id}
                     className="group transition-colors hover:bg-[#F8F9FC]"
                   >
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                    <td className="px-3 sm:px-6 py-2 sm:py-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center text-white font-semibold text-[10px] sm:text-sm flex-shrink-0">
                           {user.userName.charAt(0).toUpperCase()}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-semibold text-[#191C1E] truncate">
+                          <p className="text-xs sm:text-sm font-semibold text-[#191C1E] truncate">
                             {user.userName}
                           </p>
-                          <p className="text-xs text-[#8E95A9]">
+                          <p className="text-[10px] sm:text-xs text-[#8E95A9]">
                             ID: #{String(user.id).padStart(4, "0")}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-1.5">
-                        <Mail size={14} className="text-[#8E95A9] flex-shrink-0" />
-                        <span className="text-sm text-[#565E74] truncate">
+                    <td className="  sm:table-cell px-3 sm:px-6 py-2 sm:py-4">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <Mail size={12} className="sm:w-[14px] sm:h-[14px] text-[#8E95A9] flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-[#565E74] truncate">
                           {user.email}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-1.5">
-                        <Phone size={14} className="text-[#8E95A9] flex-shrink-0" />
-                        <span className="text-sm text-[#565E74]">
+                    <td className="  md:table-cell px-3 sm:px-6 py-2 sm:py-4">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <Phone size={12} className="sm:w-[14px] sm:h-[14px] text-[#8E95A9] flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-[#565E74]">
                           {user.phoneNumber || "—"}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-1.5">
-                        <MapPin size={14} className="text-[#8E95A9] flex-shrink-0" />
-                        <span className="text-sm text-[#565E74] capitalize">
+                    <td className="  lg:table-cell px-3 sm:px-6 py-2 sm:py-4">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <MapPin size={12} className="sm:w-[14px] sm:h-[14px] text-[#8E95A9] flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-[#565E74] capitalize">
                           {user.country || "—"}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-2 sm:py-4">
                       {getStatusBadge(user.isActivated)}
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center justify-end gap-0.5">
+                    <td className="px-3 sm:px-6 py-2 sm:py-4">
+                      <div className="flex items-center justify-end gap-0.5 sm:gap-0.5">
                         <button
                           aria-label="Toggle user status"
                           onClick={() => {
                             setSelectedUser(user);
                             setOpenToggle(true);
                           }}
-                          className={`rounded-lg p-1.5 transition-all ${
+                          className={`rounded-lg p-2 sm:p-1.5 transition-all min-h-[44px] sm:min-h-0 min-w-[44px] sm:min-w-0 ${
                             user.isActivated
                               ? "text-amber-600 hover:bg-amber-50 hover:text-amber-700"
                               : "text-green-600 hover:bg-green-50 hover:text-green-700"
@@ -406,12 +406,11 @@ export default function UsersContent({
                           title={user.isActivated ? "Deactivate" : "Activate"}
                         >
                           {user.isActivated ? (
-                            <PowerOff size={16} />
+                            <PowerOff size={16} className="sm:w-[16px] sm:h-[16px]" />
                           ) : (
-                            <Power size={16} />
+                            <Power size={16} className="sm:w-[16px] sm:h-[16px]" />
                           )}
                         </button>
-
                       </div>
                     </td>
                   </tr>

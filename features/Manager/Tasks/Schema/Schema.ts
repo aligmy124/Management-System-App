@@ -8,7 +8,7 @@ export const TaskSchema = z.object({
 
   description: z
     .string()
-    .min(10, "Description must be at least 10 characters")
+    .min(20, "Description must be at least 20 characters")
     .max(500, "Description must be less than 500 characters"),
 
   employeeId: z
@@ -19,7 +19,8 @@ export const TaskSchema = z.object({
   projectId: z
     .number()
     .int("Project ID must be an integer")
-    .positive("You must select a valid project"),
+    .positive("You must select a valid project")
+    .optional(),
 });
 
 export type TaskFormData = z.infer<typeof TaskSchema>;

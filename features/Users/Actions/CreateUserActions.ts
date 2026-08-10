@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { ApiError } from "@/lib/api-error";
-import { CreateUserSchema } from "../Types/Types";
+import { CreateUserSchema } from "../Schema/Schema";
 import { createUser } from "../Services/UsersServices";
 
 export async function createUserAction(prevState: any, formData: FormData) {

@@ -110,7 +110,7 @@ export default function LoginForm() {
           </div>
 
           {/* Remember me & Sign In row */}
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <label className="flex items-center gap-2 text-sm text-[#191c1e] cursor-pointer">
               <input
                 type="checkbox"
@@ -119,7 +119,7 @@ export default function LoginForm() {
               />
               <span>Remember me for 30 days</span>
             </label>
-          </div>
+          </div> */}
 
           {/* Sign In Button */}
           <button

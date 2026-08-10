@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateUserSchema, CreateUserFormData } from "../../Types/Types";
+import { CreateUserSchema, CreateUserFormData } from "../../Schema/Schema";
 import { createUserAction } from "../../Actions/CreateUserActions";
 import { toast } from "sonner";
 import { Loader2, UserPlus, Lock, Mail, Phone, MapPin, UserIcon } from "lucide-react";

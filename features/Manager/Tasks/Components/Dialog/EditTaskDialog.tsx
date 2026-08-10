@@ -37,6 +37,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
     reset,
     setError,
     watch,
+    setValue,
   } = useForm<TaskFormData>({
     resolver: zodResolver(TaskSchema),
     defaultValues: {
@@ -51,23 +52,37 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
 
   useEffect(() => {
     if (task && open) {
+      const employeeId = task.employee?.id || 0;
       reset({
-        title: task.title,
-        description: task.description,
-        employeeId: task.employee?.id || 0,
+        title: task.title || "",
+        description: task.description || "",
+        employeeId: employeeId,
       });
-      setSelectedEmployee(task.employee?.id?.toString() || "");
+      setSelectedEmployee(employeeId.toString());
     }
   }, [task, open, reset]);
 
   const onSubmit = async (data: TaskFormData) => {
-    if (!task) return;
+  console.log("1 - SUBMIT:", data);
+
+  if (!task) {
+    console.log("NO TASK");
+    return;
+  }
+
+  console.log("2 - TASK ID:", task.id);
+
+  try {
+    console.log("3 - CALLING ACTION");
 
     const result = await updateTaskAction(data, task.id);
+
+    console.log("4 - ACTION RESULT:", result);
+
     if (!result.success) {
       toast.error(result.message);
 
-      if (result?.fieldErrors) {
+      if (result.fieldErrors) {
         Object.entries(result.fieldErrors).forEach(([field, messages]) => {
           setError(field as keyof TaskFormData, {
             type: "manual",
@@ -75,12 +90,20 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
           });
         });
       }
+
       return;
     }
+
+    console.log("5 - SUCCESS");
+
     toast.success(result.message);
     onOpenChange(false);
     reset();
-  };
+  } catch (error) {
+    console.error("6 - SUBMIT ERROR:", error);
+    toast.error("Something went wrong");
+  }
+};
 
   const getSelectedEmployeeName = () => {
     const employee = employees.find((emp) => emp.id === Number(selectedEmployee));
@@ -90,7 +113,14 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px] p-0 gap-0 overflow-hidden">
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6">
+<form
+  onSubmit={handleSubmit(
+    onSubmit,
+    (errors) => {
+      console.log("❌ VALIDATION ERRORS:", errors);
+    }
+  )}
+>
           {/* Header */}
           <DialogHeader className="space-y-3">
             <div className="flex items-center gap-3">
@@ -164,8 +194,11 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
                       ? "border-red-500 focus-visible:ring-red-500"
                       : "border-input focus-visible:ring-ring"
                   }`}
-                  {...register("employeeId", { valueAsNumber: true })}
-                  onChange={(e) => setSelectedEmployee(e.target.value)}
+                  value={selectedEmployee}
+                  {...register("employeeId", { 
+                    valueAsNumber: true,
+                    onChange: (e) => setSelectedEmployee(e.target.value)
+                  })}
                 >
                   <option value="">Select employee...</option>
                   {employees.map((employee) => (
@@ -198,7 +231,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
                 </p>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span>ID: #{String(task?.id).padStart(4, "0")}</span>
-                  {selectedEmployee && (
+                  {selectedEmployee && selectedEmployee !== "0" && (
                     <>
                       <span>•</span>
                       <span>Assigned to: {getSelectedEmployeeName()}</span>
@@ -216,6 +249,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
               variant="outline"
               onClick={() => onOpenChange(false)}
               className="flex-1"
+              disabled={isSubmitting}
             >
               Cancel
             </Button>

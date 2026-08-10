@@ -212,7 +212,7 @@ export default function ProjectForm() {
           </div>
 
           {/* Form Actions */}
-          <div className="flex flex-col-reverse gap-2 sm:gap-3 pt-4 sm:pt-6 sm:flex-row sm:items-center sm:justify-end border-t border-[#EFF0F4]">
+          <div className="cursor-pointer flex flex-col-reverse gap-2 sm:gap-3 pt-4 sm:pt-6 sm:flex-row sm:items-center sm:justify-end border-t border-[#EFF0F4]">
             <Link
               href="/dashboard/projects"
               className="flex items-center justify-center gap-2 rounded-xl sm:rounded-2xl border-2 border-[#EFF0F4] px-6 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-[#565E74] transition-all hover:border-[#D0D5DD] hover:bg-[#F8F9FC] hover:text-[#191C1E] w-full sm:w-auto"
@@ -222,7 +222,7 @@ export default function ProjectForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center justify-center gap-2 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-white shadow-lg shadow-blue-600/20 transition-all hover:shadow-xl hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 w-full sm:w-auto"
+              className="cursor-pointer flex items-center justify-center gap-2 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-white shadow-lg shadow-blue-600/20 transition-all hover:shadow-xl hover:shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 w-full sm:w-auto"
             >
               {isSubmitting ? (
                 <>
