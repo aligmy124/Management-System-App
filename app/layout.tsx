@@ -10,6 +10,21 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "PMS - Project Management System",
   description: "Streamline your workflow, manage projects, track tasks, and collaborate with your team efficiently in one centralized platform.",
+  openGraph: {
+    title: "PMS - Project Management System",
+    description: "Streamline your workflow, manage projects, track tasks, and collaborate with your team efficiently in one centralized platform.",
+    siteName: "PMS",
+    images: [
+      {
+        url: "/metadata.jpg",
+        width: 1200,
+        height: 630,
+        alt: "PMS - Project Management System",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

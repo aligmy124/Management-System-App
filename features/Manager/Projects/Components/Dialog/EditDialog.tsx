@@ -145,14 +145,14 @@ export default function EditProjectDialog({ project, open, onOpenChange }: Props
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="flex-1"
+              className="cursor-pointer flex-1"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1"
+              className="cursor-pointer flex-1"
             >
               {isSubmitting ? (
                 <>

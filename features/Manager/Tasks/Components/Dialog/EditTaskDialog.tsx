@@ -254,14 +254,13 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
               </div>
             </div>
           </div>
-
           {/* Actions */}
-          <DialogFooter className="mt-4 sm:mt-6 gap-2 sm:gap-2 flex-col-reverse xs:flex-row">
+          <div className="flex flex-col-reverse xs:flex-row gap-2 sm:gap-2 mt-4 sm:mt-6">
             <Button
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="w-full xs:flex-1 min-h-[44px] sm:min-h-0"
+              className="cursor-pointer w-full xs:flex-1 min-h-[44px] sm:min-h-0"
               disabled={isSubmitting}
             >
               Cancel
@@ -269,7 +268,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full xs:flex-1 min-h-[44px] sm:min-h-0"
+              className="cursor-pointer w-full xs:flex-1 min-h-[44px] sm:min-h-0"
             >
               {isSubmitting ? (
                 <>
@@ -280,7 +279,7 @@ export default function EditTaskDialog({ task, open, onOpenChange, employees = [
                 "Save Changes"
               )}
             </Button>
-          </DialogFooter>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

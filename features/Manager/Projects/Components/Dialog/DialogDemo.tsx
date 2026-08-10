@@ -96,7 +96,7 @@ export default function DeleteProjectDialog({ project, open, onOpenChange }: Pro
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="flex-1"
+              className="cursor-pointer flex-1"
               disabled={isPending}
             >
               Cancel
@@ -105,7 +105,7 @@ export default function DeleteProjectDialog({ project, open, onOpenChange }: Pro
               type="submit"
               variant="destructive"
               disabled={isPending}
-              className="flex-1"
+              className="cursor-pointer flex-1"
             >
               {isPending ? (
                 <>
